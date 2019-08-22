@@ -4,6 +4,8 @@
   "description": "playing with socket.io",
   "main": "index.js",
   "scripts": {
+    "clean_web": "rm -fr web/dist",
+    "build_html": "pug --pretty --out web/dist/ web/pug/index.pug",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,0 +1,31 @@
+//- index.pug
+doctype html
+html(lang="fr")
+  head
+    meta(charset='utf-8')
+    title kiss_socket.io
+    meta(name='description', content='A sandbox to experiment socket.io')
+    meta(name='author', content='charlyoleg')
+    //meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    //link(rel='stylesheet', href='css/kiss_socketio_style.css?v=1.0')
+    //link(rel='manifest', href='/manifest.json')
+    //link(rel='icon', href='kiss_socketio_favicon.svg', type='image/svg+xml')
+  body
+    h1 Kiss Socket.io client in browser
+    a(href="https://socket.io") socket.io
+    .mycontribution My contributions
+      input.quantity_in(type="number" min="0" max="10000")
+      button(type="button") Send
+    .groupresult
+      p.quantity_out Zero
+    // the logic
+    script(src="/socket.io/socket.io.js")
+    // in a separated file
+    //script(type='module', src='js/kiss_socketio.js?v=1.0')
+    // embedde in html
+    script.
+      var socket = io.connect('http://localhost');
+      socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+      });
