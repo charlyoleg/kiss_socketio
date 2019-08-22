@@ -2,10 +2,11 @@
   "name": "kiss_socketio",
   "version": "1.0.0",
   "description": "playing with socket.io",
-  "main": "index.js",
+  "main": "srv/dist/index.js",
   "scripts": {
     "clean_web": "rm -fr web/dist",
     "build_html": "pug --pretty --out web/dist/ web/pug/index.pug",
+    "start": "node srv/dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
