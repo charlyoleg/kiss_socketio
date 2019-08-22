@@ -12,4 +12,9 @@ Presentation
 
 It contains the client side and the server side.
 
+See also *Socket.io* on github_ and npmjs_.
+
+.. _github : https://github.com/socketio/socket.io
+.. _npmjs : https://www.npmjs.com/package/socket.io
+
 
