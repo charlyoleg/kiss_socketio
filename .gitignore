@@ -1,0 +1,7 @@
+# .gitignore for kiss_socketio
+*~
+*.swp
+node_modules
+*.pdf
+web/dist/
+srv/dist/
