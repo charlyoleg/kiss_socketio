@@ -6,7 +6,7 @@
   "scripts": {
     "clean_web": "rm -fr web/dist",
     "build_html": "pug --pretty --out web/dist/ web/pug/index.pug",
-    "clean_srv_http_ws": "rm -fr srv_http_ws",
+    "clean_srv_http_ws": "rm -fr srv_http_ws/dist",
     "build_srv_http_ws_js": "tsc -p srv_http_ws",
     "build_srv_http_ws_cp": "cpx --clean web/dist/index.html srv_http_ws/dist",
     "build_srv_http_ws": "run-s build_srv_http_ws_js build_srv_http_ws_cp",
