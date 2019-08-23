@@ -16,7 +16,12 @@ html(lang="fr")
     .mycontribution My contributions
       input.quantity_in(type="number" min="0" max="10000")
       button(type="button") Send
-    .groupresult
+    .groupresult_push
+      p The pushed group-result:
+      p.quantity_out Zero
+    .groupresult_pull
+      p The pulled group-result:
+      button(type="button") Ask
       p.quantity_out Zero
     // the logic
     script(src="/socket.io/socket.io.js")
