@@ -4,5 +4,4 @@
 node_modules
 *.pdf
 web/dist/
-srv_http_ws/dist/
-srv_ws/dist/
+srv/dist/
