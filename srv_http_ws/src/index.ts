@@ -14,13 +14,13 @@ server.listen(8005, function () {
    console.log("In your browser, open http://localhost:%s", port);
 });
 
-app.get('/', function (req, res) {
+app.get('/', function (req: any, res: any) {
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function (socket) {
+io.on('connection', function (socket: any) {
   socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
+  socket.on('my other event', function (data: any) {
     console.log(data);
   });
 });
