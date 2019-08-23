@@ -14,7 +14,7 @@
         "paths": {
             "*": [
                 "node_modules/",
-                "srv_http_ws/src/types/*"
+                "srv/src/types/*"
             ]
         }
     },
