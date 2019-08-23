@@ -56,4 +56,15 @@ With the 2 servers and the 3 clients, we get possible comibnations:
 - combi6 : srv_ws and client_py
 
 
+Npm packages
+============
+
+ncp versu cpx
+-------------
+
+ncp_ is much more populare but doesn't have the feature *watch*. cpx_ has the feature *watch*, has dependencies and one minor vulnerability.
+
+.. _ncp : https://www.npmjs.com/package/ncp
+.. _cpx : https://www.npmjs.com/package/cpx
+
 
