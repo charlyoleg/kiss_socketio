@@ -15,6 +15,12 @@ server.listen(8005, function () {
 });
 
 //////////////////////////////
+// global variables
+//////////////////////////////
+
+let total_contribution: number = 0;
+
+//////////////////////////////
 // serving files
 //////////////////////////////
 
@@ -33,6 +39,15 @@ app.get('/css/kiss_socketio_style.css', function (req: any, res: any) {
 //////////////////////////////
 // rest api
 //////////////////////////////
+
+app.post('/contribute', function (req: any, res: any) {
+  total_contribution += 1;
+  res.end();
+});
+
+app.get('/group_result', function (req: any, res: any) {
+  res.end(total_contribution);
+});
 
 
 //////////////////////////////

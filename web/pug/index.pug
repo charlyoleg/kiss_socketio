@@ -14,14 +14,16 @@ html(lang="fr")
     h1 Kiss Socket.io client in browser
     a(href="https://socket.io") socket.io
     .mycontribution My contributions
-      input.quantity_in(type="number" min="0" max="10000")
-      button(type="button") Send
+      input#quantity_in(type="number" min="0" max="10000" step="1" value="1")
+      button#button_send(type="button") Send
     .groupresult_push
       p The pushed group-result:
-      p.quantity_out Zero
+      p#push_quantity_out Zero
     .groupresult_pull
       p The pulled group-result:
-      button(type="button") Ask
-      p.quantity_out Zero
+      button#button_ask(type="button") Ask
+      p#pull_quantity_out Zero
     // the logic
-    script(type='module', src='js/kiss_socketio.js?v=1.0')
+    //script(type='module', src='js/kiss_socketio.js?v=1.0')
+    script(src='/socket.io/socket.io.js')
+    script(src='js/kiss_socketio.js?v=1.0')
