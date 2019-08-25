@@ -2,6 +2,7 @@
 
 // @ts-ignore
 //import * as zog from '/socket.io/socket.io.js';
+//import io from 'socket.io-client';
 
 const server_name: string = 'http://localhost:8005';
 
@@ -57,9 +58,9 @@ function askResult () {
 // WebSocket
 /////////////////////////////////////////
 
-//var socket = io.connect('http://localhost:8005');
-//socket.on('news', function (data: any) {
-//  console.log(data);
-//  socket.emit('my other event', { my: 'data' });
-//});
+const socket = io.connect(server_name);
+socket.on('news', function (data: any) {
+  console.log(data);
+  socket.emit('my other event', { my: 'bonjour' });
+});
 
