@@ -41,12 +41,15 @@ app.get('/css/kiss_socketio_style.css', function (req: any, res: any) {
 //////////////////////////////
 
 app.post('/contribute', function (req: any, res: any) {
+  console.log(req.body);
   total_contribution += 1;
   res.end();
 });
 
 app.get('/group_result', function (req: any, res: any) {
-  res.end(total_contribution);
+  let r_group_result = {total: total_contribution};
+  console.log(r_group_result);
+  res.json(r_group_result);
 });
 
 

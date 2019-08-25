@@ -3,6 +3,8 @@
 // @ts-ignore
 //import * as zog from '/socket.io/socket.io.js';
 
+const server_name: String = 'http://localhost:8005';
+
 /////////////////////////////////////////
 // Http Rest Api
 /////////////////////////////////////////
@@ -11,7 +13,7 @@ function sendPoints () {
   let point_contribution  = (<HTMLInputElement>document.querySelector('#quantity_in')).value;
   console.log("Send a contribution of " + point_contribution + " points.");
   let post_payload =  {contrib: point_contribution};
-  fetch('https://localhost:8005/contribute', {
+  fetch('http://localhost:8005/contribute', {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
@@ -26,7 +28,7 @@ function sendPoints () {
 }
 
 function askResult () {
-  fetch('https://localhost:8005/group_result')
+  fetch('http://localhost:8005/group_result')
     .then((res) => { // http response
       if (res.ok) {
         return res.text(); // consuming the http body
