@@ -33,6 +33,24 @@ app.get('/css/kiss_socketio_style.css', function (req: any, res: any) {
 });
 
 
+// ####################################
+// Browser security policy: Access-Control-Allow-Origin
+// ####################################
+
+/**
+ * @param {module:http.ClientRequest} req
+ * @param {module:http.ServerResponse} res
+ */
+app.use("/", (req: any, res: any, next: any) => {
+  //res.header("Access-Control-Allow-Origin", "*");
+  if (req.headers.origin) {
+    const origin = req.headers.origin;
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  next();
+});
+
+
 //////////////////////////////
 // rest api
 //////////////////////////////
