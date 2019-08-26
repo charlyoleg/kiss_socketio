@@ -8,15 +8,6 @@ const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-// WARNING: app.listen(80) will NOT work here!
-server.listen(8005, function () {
-   //console.log(server.address());
-   var host = server.address().address;
-   var port = server.address().port;
-   //console.log("In your browser, open http://%s:%s", host, port);
-   console.log("In your browser, open http://localhost:%s", port);
-});
-
 
 //////////////////////////////
 // global variables
@@ -67,9 +58,30 @@ app.get('/group_result', function (req: any, res: any) {
 //////////////////////////////
 
 io.on('connection', function (socket: any) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data: any) {
-    console.log(data);
+  console.log('socketio connecting');
+  console.log(socket);
+  // send event to all clients
+  socket.on('one more contribution', function (event_data: any) {
+    console.log(event_data);
+    let group_result = {total: total_contribution};
+    socket.emit('update result', group_result);
+  });
+  // disconnecting
+  socket.on('disconnect', function () {
+    console.log('socketio disconnecting');
   });
 });
 
+
+//////////////////////////////
+// running the server
+//////////////////////////////
+
+// WARNING: app.listen(80) will NOT work here!
+server.listen(8005, function () {
+   //console.log(server.address());
+   var host = server.address().address;
+   var port = server.address().port;
+   //console.log("In your browser, open http://%s:%s", host, port);
+   console.log("In your browser, open http://localhost:%s", port);
+});
