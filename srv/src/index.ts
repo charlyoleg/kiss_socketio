@@ -59,7 +59,8 @@ app.get('/group_result', function (req: any, res: any) {
 
 io.on('connection', function (socket: any) {
   console.log('socketio connecting');
-  console.log(socket);
+  //console.log(socket);
+  //console.log(socket.client.conn);
   // send event to all clients
   socket.on('one more contribution', function (event_data: any) {
     console.log(event_data);

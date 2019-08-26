@@ -6,6 +6,8 @@
 
 const server_name: string = 'http://localhost:8005';
 
+const socket = io.connect(server_name);
+
 /////////////////////////////////////////
 // Http Rest Api
 /////////////////////////////////////////
@@ -27,6 +29,8 @@ function sendPoints () {
       throw new Error('ERR026: Network response was not ok.');
     }).then((resJson) => {
       console.log('POST successful with response: ' + JSON.stringify(resJson));
+      // SocketIO emits an event
+      socket.emit('one more contribution', post_payload);
     }).catch((err) => {
       console.log('ERR030: POST with error:', err);
     });
@@ -55,12 +59,24 @@ function askResult () {
 
 
 /////////////////////////////////////////
-// WebSocket
+// WebSocket-Socketio event receivers
 /////////////////////////////////////////
 
-const socket = io.connect(server_name);
-socket.on('news', function (data: any) {
-  console.log(data);
-  socket.emit('my other event', { my: 'bonjour' });
+socket.on('update result', function (event_data: any) {
+  console.log(event_data);
+  //let event_data_json = JSON.parse(event_data);
+  let current_result: number = parseFloat(event_data.total);
+  console.log("event_result: " + current_result);
+  (<HTMLParagraphElement>document.querySelector('#push_quantity_out')).innerHTML = current_result.toString();
+});
+
+socket.on('connect', function (event_data: any) {
+  console.log('socketio connecting. event_data: ', event_data);
+  //console.log(event_data);
+});
+
+socket.on('disconnect', function (event_data: any) {
+  console.log('socketio disconnecting. event_data: ', event_data);
+  //console.log(event_data);
 });
 
