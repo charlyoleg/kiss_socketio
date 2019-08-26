@@ -4,7 +4,7 @@
 //import * as zog from '/socket.io/socket.io.js';
 //import io from 'socket.io-client';
 
-const server_name: string = 'http://localhost:8005';
+const server_name: string = 'https://localhost:8005';
 
 const socket = io(server_name);
 
