@@ -113,8 +113,8 @@ server.listen(https_port, () => {
   let host = server.address().address;
   // @ts-ignore
   let port = server.address().port;
-  //console.log("In your browser, open http://%s:%s", host, port);
-  console.log("In your browser, open http://localhost:%s", port);
+  //console.log("In your browser, open https://%s:%s", host, port);
+  console.log("In your browser, open https://localhost:%s", port);
 });
 
 
