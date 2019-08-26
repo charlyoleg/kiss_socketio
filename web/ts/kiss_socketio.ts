@@ -80,3 +80,14 @@ socket.on('disconnect', function (event_data: any) {
   //console.log(event_data);
 });
 
+
+/////////////////////////////////////////
+// Event when the page/tab is activated
+/////////////////////////////////////////
+
+document.addEventListener('visibilitychange', () => {
+  console.log("Visibility of page has changed!");
+  let dummy_payload =  {contrib: '0'};
+  socket.emit('one more contribution', dummy_payload);
+});
+
