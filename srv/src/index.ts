@@ -17,7 +17,6 @@ const app = express();
 const server = https.createServer(ssl_options, app);
 const io = require('socket.io')(server);
 
-//const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 
@@ -108,22 +107,14 @@ io.on('connection', function (socket: any) {
 // running the server
 //////////////////////////////
 
-// WARNING: app.listen(80) will NOT work here!
-//server.listen(8005, function () {
-//  //console.log(server.address());
-//  var host = server.address().address;
-//  var port = server.address().port;
-//  //console.log("In your browser, open http://%s:%s", host, port);
-//  console.log("In your browser, open http://localhost:%s", port);
-//});
-
 server.listen(https_port, () => {
-  console.log("kiss_socketio server: listening at https port " + https_port);
-  ////console.log(server.address());
-  //var host = server.address().address;
-  //var port = server.address().port;
-  ////console.log("In your browser, open http://%s:%s", host, port);
-  //console.log("In your browser, open http://localhost:%s", port);
+  //console.log(server.address());
+  // @ts-ignore
+  let host = server.address().address;
+  // @ts-ignore
+  let port = server.address().port;
+  //console.log("In your browser, open http://%s:%s", host, port);
+  console.log("In your browser, open http://localhost:%s", port);
 });
 
 
