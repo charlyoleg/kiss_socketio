@@ -14,14 +14,16 @@
     "start": "run-s clean_web build_web serve_web",
     "clean_srv": "rm -fr srv/dist",
     "build_srv_js": "tsc -p srv",
+    "build_srv_cp_keys": "ncp srv/kiss_socketio.key srv/dist/kiss_socketio.key --stopOnErr && ncp srv/kiss_socketio.crt srv/dist/kiss_socketio.crt --stopOnErr",
     "build_srv_cp_html": "ncp web/dist/index.html srv/dist/index.html --stopOnErr",
     "build_srv_cp_css": "ncp web/dist/css/kiss_socketio_style.css srv/dist/kiss_socketio_style.css --stopOnErr",
     "build_srv_cp_js": "ncp web/dist/js/kiss_socketio.js srv/dist/kiss_socketio.js --stopOnErr",
     "build_srv_cp": "run-p -l build_srv_cp_html build_srv_cp_css build_srv_cp_js",
-    "build_srv": "run-s build_srv_js build_srv_cp",
+    "build_srv": "run-s build_srv_js build_srv_cp_keys build_srv_cp",
     "serve": "node srv/dist/index.js",
     "resrv": "run-s clean_web build_web clean_srv build_srv serve",
-    "resrv2": "run-s clean_srv build_srv_js serve",
+    "resrv2": "run-s clean_srv build_srv_js build_srv_cp_keys serve",
+    "create_ssl_keys": "openssl genrsa -out srv/kiss_socketio.key 2018 && chmod a-w srv/kiss_socketio.key && chmod go-r srv/kiss_socketio.key && openssl req -new -x509 -nodes -sha256 -days 365 -key srv/kiss_socketio.key -out srv/kiss_socketio.crt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,6 +37,8 @@
   },
   "homepage": "https://github.com/charlyoleg/kiss_socketio#readme",
   "dependencies": {
+    "@types/body-parser": "^1.17.1",
+    "@types/express": "^4.17.1",
     "@types/node": "^12.7.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",

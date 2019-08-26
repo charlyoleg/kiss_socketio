@@ -1,11 +1,23 @@
 // index.ts
 //
 
-const app = require('express')();
-const server = require('http').Server(app);
+import express from "express";
+import * as bodyParser from "body-parser";
+import fs from "fs";
+import https from "https";
+//import io from "socket.io";
+
+const ssl_options = {
+    key: fs.readFileSync("srv/kiss_socketio.key"),
+    cert: fs.readFileSync("srv/kiss_socketio.crt")
+};
+const https_port = 8005;
+
+const app = express();
+const server = https.createServer(ssl_options, app);
 const io = require('socket.io')(server);
 
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 
@@ -97,10 +109,21 @@ io.on('connection', function (socket: any) {
 //////////////////////////////
 
 // WARNING: app.listen(80) will NOT work here!
-server.listen(8005, function () {
-   //console.log(server.address());
-   var host = server.address().address;
-   var port = server.address().port;
-   //console.log("In your browser, open http://%s:%s", host, port);
-   console.log("In your browser, open http://localhost:%s", port);
+//server.listen(8005, function () {
+//  //console.log(server.address());
+//  var host = server.address().address;
+//  var port = server.address().port;
+//  //console.log("In your browser, open http://%s:%s", host, port);
+//  console.log("In your browser, open http://localhost:%s", port);
+//});
+
+server.listen(https_port, () => {
+  console.log("kiss_socketio server: listening at https port " + https_port);
+  ////console.log(server.address());
+  //var host = server.address().address;
+  //var port = server.address().port;
+  ////console.log("In your browser, open http://%s:%s", host, port);
+  //console.log("In your browser, open http://localhost:%s", port);
 });
+
+
