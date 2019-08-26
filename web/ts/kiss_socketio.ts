@@ -6,7 +6,7 @@
 
 const server_name: string = 'http://localhost:8005';
 
-const socket = io.connect(server_name);
+const socket = io(server_name);
 
 /////////////////////////////////////////
 // Http Rest Api
