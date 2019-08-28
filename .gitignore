@@ -5,3 +5,4 @@ node_modules
 *.pdf
 web/dist/
 srv/dist/
+client_js/dist/
