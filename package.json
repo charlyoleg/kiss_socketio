@@ -23,6 +23,10 @@
     "resrv_html_ws": "run-s clean_web build_web clean_srv build_srv serve",
     "resrv_ws": "run-s clean_srv build_srv_js serve",
     "create_ssl_keys": "srv/create_ssl_keys.sh",
+    "clean_client_js": "rm -fr client_js/dist",
+    "build_client_js": "tsc -p client_js",
+    "run_client_js": "node client_js/dist/client.js",
+    "rerun_client_js": "run-s clean_client_js build_client_js run_client_js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
