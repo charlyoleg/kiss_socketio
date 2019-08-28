@@ -6,12 +6,12 @@ import https from 'https';
 
 
 const server_name = 'https://localhost:8005';
-
-const socket = io(server_name);
-
 const agent = new https.Agent({
   rejectUnauthorized: false
 });
+
+const socket = io(server_name , {rejectUnauthorized: false });
+
 
 //////////////////////////////////
 // register the listened events
@@ -19,15 +19,15 @@ const agent = new https.Agent({
 
 socket.on('update result', function (event_data: any) {
   let current_result: number = parseFloat(event_data.total);
-  console.log("event_result: " + current_result);
+  console.log(">>> socketio event_result: " + current_result);
 });
 
 socket.on('connect', function (event_data: any) {
-  console.log('socketio connecting. event_data: ', event_data);
+  console.log('>>> socketio connecting. event_data: ', event_data);
 });
 
 socket.on('disconnect', function (event_data: any) {
-  console.log('socketio disconnecting. event_data: ', event_data);
+  console.log('>>> socketio disconnecting. event_data: ', event_data);
 });
 
 function stop_socket () {
@@ -73,6 +73,8 @@ async function post_contribution (point_contribution: number) {
     console.error(error);
   }
   console.log('the end2 of the POST')
+  // generate a Socket.io event
+  socket.emit('one more contribution', post_payload);
 }
 
 
