@@ -2,6 +2,7 @@
 *~
 *.swp
 node_modules
+.venv
 *.pdf
 web/dist/
 srv/dist/
