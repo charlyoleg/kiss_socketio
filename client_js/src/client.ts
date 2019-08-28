@@ -64,6 +64,17 @@ async function get_result () {
   console.log('the end2 of the GET')
 }
 
+async function post_contribution (point_contribution: number) {
+  let post_payload =  {contrib: point_contribution};
+  try {
+    const response = await axios.post(server_name + '/contribute', post_payload, { httpsAgent: agent });
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+  console.log('the end2 of the POST')
+}
+
 
 //////////////////////////////////
 // play a scenario
@@ -72,7 +83,8 @@ async function get_result () {
 console.log('client.ts says Hello!');
 
 setTimeout(get_result, 1000);
-setTimeout(get_result, 2000);
+setTimeout(post_contribution, 2000, 5);
+setTimeout(post_contribution, 2500, 7);
 setTimeout(get_result, 3000);
 
 setTimeout(stop_socket, 3500);
