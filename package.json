@@ -23,7 +23,7 @@
     "serve": "node srv/dist/index.js",
     "resrv": "run-s clean_web build_web clean_srv build_srv serve",
     "resrv2": "run-s clean_srv build_srv_js build_srv_cp_keys serve",
-    "create_ssl_keys": "openssl genrsa -out srv/kiss_socketio.key 2018 && chmod a-w srv/kiss_socketio.key && chmod go-r srv/kiss_socketio.key && openssl req -new -x509 -nodes -sha256 -days 365 -key srv/kiss_socketio.key -out srv/kiss_socketio.crt",
+    "create_ssl_keys": "srv/create_ssl_keys.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
