@@ -5,7 +5,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import fs from "fs";
 import https from "https";
-//import io from "socket.io";
+import socket_io from "socket.io";
 
 const ssl_options = {
     key: fs.readFileSync("srv/kiss_socketio.key"),
@@ -15,8 +15,7 @@ const https_port = 8005;
 
 const app = express();
 const server = https.createServer(ssl_options, app);
-const io = require('socket.io')(server);
-
+const io = socket_io(server);
 const jsonParser = bodyParser.json();
 
 
