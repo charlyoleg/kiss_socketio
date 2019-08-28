@@ -44,9 +44,9 @@ app.get('/css/kiss_socketio_style.css', function (req: any, res: any) {
 });
 
 
-// ####################################
+//////////////////////////////
 // Browser security policy: Access-Control-Allow-Origin
-// ####################################
+//////////////////////////////
 
 /**
  * @param {module:http.ClientRequest} req
@@ -57,6 +57,10 @@ app.use("/", (req: any, res: any, next: any) => {
   if (req.headers.origin) {
     const origin = req.headers.origin;
     res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  //console.log('dbg061: method: ' + req.method);
+  if (req.method === "OPTIONS") {
+    res.setHeader('Access-Control-Allow-Headers', 'Accept, Content-type');
   }
   next();
 });

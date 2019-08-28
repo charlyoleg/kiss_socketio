@@ -19,7 +19,8 @@ function sendPoints () {
   fetch(server_name + '/contribute', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(post_payload)
     }).then((res) =>  {
