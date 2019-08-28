@@ -8,6 +8,7 @@ const server_name: string = 'https://localhost:8005';
 
 const socket = io(server_name);
 
+
 /////////////////////////////////////////
 // Http Rest Api
 /////////////////////////////////////////
@@ -64,7 +65,7 @@ function askResult () {
 /////////////////////////////////////////
 
 socket.on('update result', function (event_data: any) {
-  console.log(event_data);
+  //console.log(event_data);
   //let event_data_json = JSON.parse(event_data);
   let current_result: number = parseFloat(event_data.total);
   console.log("event_result: " + current_result);

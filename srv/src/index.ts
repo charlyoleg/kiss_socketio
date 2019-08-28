@@ -2,7 +2,7 @@
 //
 
 import express from "express";
-import * as bodyParser from "body-parser";
+import bodyParser from "body-parser";
 import fs from "fs";
 import https from "https";
 //import io from "socket.io";
