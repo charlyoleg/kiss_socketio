@@ -5,11 +5,12 @@ client.py
 a small python socketio client
 """
 
-#from socketIO_client import SocketIO, LoggingNamespace
 import requests
 import logging
 import time
 import json
+import socketio
+import ssl
 
 
 ##########################################################
@@ -24,6 +25,35 @@ logging.getLogger('urllib3').setLevel(logging.INFO)
 logger = logging.getLogger('')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
+
+
+##########################################################
+# sockeio registration
+##########################################################
+
+sio = socketio.Client()
+
+@sio.on('update result')
+def on_update_result(data):
+  one_total = parseFloat(data)
+  print('Update result to {:.02f}'.format(one_total))
+
+@sio.event
+def connect():
+    print("client_py connected!")
+
+@sio.event
+def disconnect():
+    print("client_py disconnected!")
+
+### ssl certificate
+ctx = ssl.create_default_context()
+ctx.load_default_certs()
+
+
+### let's start
+sio.connect('https://localhost:8005')
+print("session ID: {:d}".format(sio.sid))
 
 
 ##########################################################
