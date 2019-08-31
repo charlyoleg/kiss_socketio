@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ac35bba4fc62959b433f434f14c3f9e865a06d17e71ea8e04973e4782266a4ed"
+            "sha256": "f07e6103a563d9def5075801d4367fc76c6c6f9aba971caa42567d6d7b472e33"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -37,24 +37,6 @@
             ],
             "version": "==2.8"
         },
-        "python-engineio": {
-            "hashes": [
-                "sha256:2a4c874aea686e79f8ea9efc30748110df581df6d577d18bb5eaa1a8f2199d12",
-                "sha256:eae09ef72bbb13e66ad0bbe2fbb87271e0ba5e2ec8c6693c6be1e14239564e32"
-            ],
-            "version": "==3.9.3"
-        },
-        "python-socketio": {
-            "extras": [
-                "client"
-            ],
-            "hashes": [
-                "sha256:506b2cf7a520b40ea0b3f25e1272eff8de134dce6f471c1f6bc0de8c90fe8c57",
-                "sha256:d4e2c23241afa0aae2a5bcc107523b2fcc71f5020df89a093f3634eb48955967"
-            ],
-            "index": "pypi",
-            "version": "==4.3.1"
-        },
         "requests": {
             "hashes": [
                 "sha256:11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4",
@@ -69,6 +51,14 @@
                 "sha256:d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"
             ],
             "version": "==1.12.0"
+        },
+        "socketio-client-nexus": {
+            "hashes": [
+                "sha256:41e6aaaff981f6729690f472eb2c7a5d1dda07349077e34444527b9700b0aea5",
+                "sha256:9f44d705c38e405fcb334f95c1d5d5878a8daabdfeaca3ba56e974b69f42e643"
+            ],
+            "index": "pypi",
+            "version": "==0.7.6"
         },
         "urllib3": {
             "hashes": [

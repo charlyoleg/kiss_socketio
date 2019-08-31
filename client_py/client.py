@@ -9,8 +9,11 @@ import requests
 import logging
 import time
 import json
-import socketio
-import ssl
+#import socketio give-up because of self-certification issue
+from socketIO_client_nexus import SocketIO, LoggingNamespace
+
+import os
+print(os.environ.get('PYTHONHTTPSVERIFY'))
 
 
 ##########################################################
@@ -21,9 +24,10 @@ import ssl
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
 ### logger
-logging.getLogger('urllib3').setLevel(logging.INFO)
+#logging.getLogger('urllib3').setLevel(logging.INFO)
 logger = logging.getLogger('')
 logger.setLevel(logging.DEBUG)
+#logger.setLevel(logging.NOTSET)
 logger.addHandler(logging.StreamHandler())
 
 
@@ -31,29 +35,31 @@ logger.addHandler(logging.StreamHandler())
 # sockeio registration
 ##########################################################
 
-sio = socketio.Client()
 
-@sio.on('update result')
 def on_update_result(data):
   one_total = parseFloat(data)
   print('Update result to {:.02f}'.format(one_total))
 
-@sio.event
-def connect():
-    print("client_py connected!")
+def on_connect():
+  print("client_py connected!")
 
-@sio.event
-def disconnect():
-    print("client_py disconnected!")
+def on_disconnect():
+  print("client_py disconnected!")
 
-### ssl certificate
-ctx = ssl.create_default_context()
-ctx.load_default_certs()
+def on_reconnect():
+  print('client_pyreconnect')
 
 
 ### let's start
-sio.connect('https://localhost:8005')
-print("session ID: {:d}".format(sio.sid))
+socketIO = SocketIO('https://127.0.0.1', 8005, LoggingNamespace, verify=False)
+socketIO.on('connect', on_connect)
+socketIO.on('disconnect', on_disconnect)
+socketIO.on('reconnect', on_reconnect)
+# real stuff
+socketIO.on('update result', on_update_result)
+
+# wait a bit to check whats happen
+time.sleep(1.0)
 
 
 ##########################################################
