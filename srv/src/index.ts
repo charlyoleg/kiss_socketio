@@ -70,7 +70,7 @@ app.use("/", (req: any, res: any, next: any) => {
 //////////////////////////////
 
 app.post('/contribute', jsonParser, function (req: any, res: any) {
-  console.log(req.body);
+  console.log('POST body: ', req.body);
   let contrib_n : number = parseFloat(req.body.contrib);
   total_contribution += contrib_n;
   let r_resp= {total: total_contribution, contrib: contrib_n};
@@ -95,7 +95,7 @@ io.on('connection', function (socket: any) {
   //console.log(socket.client.conn);
   // send event to all clients
   socket.on('one more contribution', function (event_data: any) {
-    console.log(event_data);
+  console.log('Event "one more contribution": ', event_data);
     let group_result = {total: total_contribution};
     socket.emit('update result', group_result);
   });

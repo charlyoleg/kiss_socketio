@@ -12,9 +12,6 @@ import json
 #import socketio give-up because of self-certification issue
 from socketIO_client_nexus import SocketIO, LoggingNamespace
 
-import os
-print(os.environ.get('PYTHONHTTPSVERIFY'))
-
 
 ##########################################################
 # logging
@@ -24,7 +21,8 @@ print(os.environ.get('PYTHONHTTPSVERIFY'))
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
 ### logger
-#logging.getLogger('urllib3').setLevel(logging.INFO)
+logging.getLogger('urllib3').setLevel(logging.INFO)
+#logging.getLogger('SocketIO,').setLevel(logging.INFO)
 logger = logging.getLogger('')
 logger.setLevel(logging.DEBUG)
 #logger.setLevel(logging.NOTSET)
@@ -36,30 +34,35 @@ logger.addHandler(logging.StreamHandler())
 ##########################################################
 
 
-def on_update_result(data):
-  one_total = parseFloat(data)
-  print('Update result to {:.02f}'.format(one_total))
+def on_update_result(event_data):
+  logger.info('client gets event on_update_result')
+  #logger.debug(data)
+  one_total = event_data['total']
+  logger.info('Update result to {:.02f}'.format(one_total))
 
 def on_connect():
-  print("client_py connected!")
+  logger.info("client_py connected!")
 
 def on_disconnect():
-  print("client_py disconnected!")
+  logger.info("client_py disconnected!")
 
 def on_reconnect():
-  print('client_pyreconnect')
+  logger.info('client_pyreconnect')
 
 
 ### let's start
-socketIO = SocketIO('https://127.0.0.1', 8005, LoggingNamespace, verify=False)
-socketIO.on('connect', on_connect)
-socketIO.on('disconnect', on_disconnect)
-socketIO.on('reconnect', on_reconnect)
+socket_io = SocketIO('https://127.0.0.1', 8005, LoggingNamespace, verify=False)
+socket_io.on('connect', on_connect)
+socket_io.on('disconnect', on_disconnect)
+socket_io.on('reconnect', on_reconnect)
 # real stuff
-socketIO.on('update result', on_update_result)
+socket_io.on('update result', on_update_result)
 
 # wait a bit to check whats happen
 time.sleep(1.0)
+#payload_json = {"contrib": "2"}
+#socket_io.emit('one more contribution', payload_json);
+socket_io.wait(seconds=1)
 
 
 ##########################################################
@@ -70,7 +73,7 @@ def get_group_result():
   "requests GET on group_result"
   r = requests.get('https://localhost:8005/group_result', verify=False)
   if (r.status_code == 200):
-    logger.info('group_result: {:d}'.format(r.json()['total']))
+    logger.info('GET info: group_result: {:d}'.format(r.json()['total']))
   else:
     logger.error('ERR027: Error by GET /group_result')
 
@@ -80,7 +83,9 @@ def post_contribute(point):
   r = requests.post('https://localhost:8005/contribute', json=payload_json, verify=False)
   if (r.status_code == 200):
     #print(r.text)
-    logger.info('new total: {:d}'.format(r.json()['total']))
+    logger.info('POST info: new total: {:d}'.format(r.json()['total']))
+    socket_io.emit('one more contribution', payload_json);
+    socket_io.wait(seconds=1)
   else:
     logger.error('ERR027: Error by POST /contrib')
 
