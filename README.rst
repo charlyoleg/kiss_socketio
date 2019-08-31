@@ -52,3 +52,20 @@ ncp_ is much more populare but doesn't have the feature *watch*. cpx_ has the fe
 .. _cpx : https://www.npmjs.com/package/cpx
 
 
+Python packages
+===============
+
+socket.io clients
+-----------------
+
+The candidates to make a socket.io client with Python:
+
+- python-socketio_
+- socketIO-client_
+- socketIO-client-nexus_
+
+With the two firsts, I couldn't disable the certification verification of my self certificate. The third one lets me disable it with *verify=True*.
+
+.. _socketIO-client : https://pypi.org/project/socketIO-client/
+.. _socketIO-client-nexus : https://pypi.org/project/socketIO-client-nexus/
+
