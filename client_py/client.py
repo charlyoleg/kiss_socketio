@@ -85,7 +85,7 @@ def post_contribute(point):
     #print(r.text)
     logger.info('POST info: new total: {:d}'.format(r.json()['total']))
     socket_io.emit('one more contribution', payload_json);
-    socket_io.wait(seconds=1)
+    socket_io.wait(seconds=1) # ease the event handling
   else:
     logger.error('ERR027: Error by POST /contrib')
 
@@ -105,5 +105,6 @@ get_group_result()
 
 ### Bye
 time.sleep(0.5)
+socket_io.wait(seconds=1) # ensure all events are handled
 logger.info("client.py says Bye!")
 
